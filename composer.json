@@ -1,7 +1,11 @@
 {
     "name": "compwright/easy-api",
     "description": "Easy API tools for building PSR-compliant SDKs for PHP",
-    "keywords": ["psr-7", "psr-17", "psr-18"],
+    "keywords": [
+        "psr-7",
+        "psr-17",
+        "psr-18"
+    ],
     "homepage": "https://github.com/compwright/easy-api",
     "type": "library",
     "license": "MIT",
@@ -24,12 +28,12 @@
             "email": "jonathon@compwright.com"
         }
     ],
-    "autoload" : {
+    "autoload": {
         "psr-4": {
             "Compwright\\EasyApi\\": "src/"
         }
     },
-    "autoload-dev" : {
+    "autoload-dev": {
         "psr-4": {
             "Compwright\\EasyApi\\": "tests/"
         }
