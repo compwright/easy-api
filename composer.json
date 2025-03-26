@@ -1,0 +1,37 @@
+{
+    "name": "compwright/easy-api",
+    "description": "Easy API tools for building PSR-compliant SDKs for PHP",
+    "keywords": ["psr-7", "psr-17", "psr-18"],
+    "homepage": "https://github.com/compwright/easy-api",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "ext-json": "*",
+        "psr/http-message": "^1.0 || ^1.1 || ^2.0",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0 || ^1.1"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.72",
+        "guzzlehttp/psr7": "^1.7 || ^2.0",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^10.5"
+    },
+    "authors": [
+        {
+            "name": "Jonathon Hill",
+            "email": "jonathon@compwright.com"
+        }
+    ],
+    "autoload" : {
+        "psr-4": {
+            "Compwright\\EasyApi\\": "src/"
+        }
+    },
+    "autoload-dev" : {
+        "psr-4": {
+            "Compwright\\EasyApi\\": "tests/"
+        }
+    }
+}
