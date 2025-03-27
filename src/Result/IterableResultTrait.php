@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Compwright\EasyApi\Result;
 
 use ArrayIterator;
-use IteratorAggregate;
 
 trait IterableResultTrait
 {

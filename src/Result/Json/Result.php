@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace Compwright\EasyApi\Result\Json;
 
 use Compwright\EasyApi\Result\DataAwareInterface;
-use Compwright\EasyApi\Result\ResponseAwareInterface;
-use Compwright\EasyApi\Result\ResponseAwareTrait;
+use Compwright\EasyApi\Result\Result as BaseResult;
 
-class Result implements ResponseAwareInterface, DataAwareInterface
+class Result extends BaseResult implements DataAwareInterface
 {
-    use ResponseAwareTrait;
-
     /**
      * @return array<int|string, mixed>
      */
