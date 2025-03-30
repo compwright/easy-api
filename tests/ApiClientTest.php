@@ -25,8 +25,7 @@ class ApiClientTest extends TestCase
             ->willReturn($response);
 
         $httpFactory = new HttpFactory();
-        $serializers = Serializer\SerializerCollection::default();
-        $requestFactory = new OperationRequestFactory($httpFactory, $httpFactory, $serializers);
+        $requestFactory = new OperationRequestFactory($httpFactory, $httpFactory);
 
         $api = new ApiClient($mockClient, $requestFactory);
 

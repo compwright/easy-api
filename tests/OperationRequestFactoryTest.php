@@ -11,8 +11,7 @@ class OperationRequestFactoryTest extends TestCase
     {
         $op = Operation::fromSpec('GET /foo')->setQueryParams(['bar' => 'baz']);
         $httpFactory = new HttpFactory();
-        $serializers = Serializer\SerializerCollection::default();
-        $requestFactory = new OperationRequestFactory($httpFactory, $httpFactory, $serializers);
+        $requestFactory = new OperationRequestFactory($httpFactory, $httpFactory);
         $request = $requestFactory->createRequest($op);
         $this->assertEquals('GET', $request->getMethod());
         $this->assertEquals('/foo?bar=baz', (string) $request->getUri());
@@ -20,11 +19,10 @@ class OperationRequestFactoryTest extends TestCase
 
     public function testCreateRequestWithBody(): void
     {
-        $op = Operation::fromSpec('POST /foo')->setBody(['bar' => 'baz']);
+        $op = Operation::fromSpec('POST /foo')->setBody(new OperationBody\JsonBody(['bar' => 'baz']));
         $httpFactory = new HttpFactory();
-        $serializers = Serializer\SerializerCollection::default();
-        $requestFactory = new OperationRequestFactory($httpFactory, $httpFactory, $serializers);
-        $request = $requestFactory->createRequest($op, 'application/json');
+        $requestFactory = new OperationRequestFactory($httpFactory, $httpFactory);
+        $request = $requestFactory->createRequest($op);
         $this->assertEquals('POST', $request->getMethod());
         $this->assertEquals('/foo', (string) $request->getUri());
         $this->assertEquals('{"bar":"baz"}', (string) $request->getBody());

@@ -16,8 +16,7 @@ class Operation implements Countable
     /** @var array<string, mixed> */
     private array $query;
 
-    /** @var mixed $body */
-    private $body;
+    private OperationBodyInterface $body;
 
     /**
      * @param int<0, max> $arity
@@ -107,10 +106,7 @@ class Operation implements Countable
         return $this->query;
     }
 
-    /**
-     * @param mixed $body
-     */
-    public function setBody($body): self
+    public function setBody(OperationBodyInterface $body): self
     {
         $this->body = $body;
         return $this;
@@ -121,10 +117,7 @@ class Operation implements Countable
         return isset($this->body);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getBody()
+    public function getBody(): OperationBodyInterface
     {
         return $this->body;
     }

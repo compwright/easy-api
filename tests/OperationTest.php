@@ -53,11 +53,11 @@ class OperationTest extends TestCase
     public function testBody(): void
     {
         $op = Operation::fromSpec('POST /foo')
-            ->setBody(['bar' => 'baz']);
+            ->setBody(new OperationBody\JsonBody(['bar' => 'baz']));
         $this->assertEquals('POST', $op->getMethod());
         $this->assertCount(0, $op);
         $this->assertTrue($op->hasBody());
         $this->assertEquals('/foo', $op->getUri());
-        $this->assertEquals(['bar' => 'baz'], $op->getBody());
+        $this->assertEquals('{"bar":"baz"}', $op->getBody()->getContent());
     }
 }

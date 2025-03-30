@@ -13,15 +13,14 @@ class OperationRequestFactory
 {
     public function __construct(
         private RequestFactoryInterface $requestFactory,
-        private StreamFactoryInterface $streamFactory,
-        private Serializer\SerializerCollection $serializers
+        private StreamFactoryInterface $streamFactory
     ) {
     }
 
     /**
      * @throws InvalidArgumentException
      */
-    public function createRequest(Operation $op, ?string $contentType = null): RequestInterface
+    public function createRequest(Operation $op): RequestInterface
     {
         $request = $this->requestFactory->createRequest(
             $op->getMethod(),
@@ -36,28 +35,16 @@ class OperationRequestFactory
         }
 
         if ($op->hasBody()) {
-            if (is_null($contentType) && !$this->serializers->hasDefaultSerializer()) {
-                throw new InvalidArgumentException('No default serializer configured');
+            $bodyContent = $op->getBody()->getContent();
+            if (is_resource($bodyContent)) {
+                $stream = $this->streamFactory->createStreamFromResource($bodyContent);
+            } elseif (is_string($bodyContent)) {
+                $stream = $this->streamFactory->createStream($bodyContent);
+            } else {
+                throw new InvalidArgumentException('Operation body data must be a string or resource');
             }
-
-            if ($contentType && !$this->serializers->hasSerializer($contentType)) {
-                throw new InvalidArgumentException('No serializer configured for content type ' . $contentType);
-            }
-
-            $serializer = $contentType
-                ? $this->serializers->getSerializer($contentType)
-                : $this->serializers->getDefaultSerializer();
-
-            $serializedBody = $serializer($op->getBody());
-            $contentType = (string) $serializer;
-
-            $stream = is_resource($serializedBody)
-                ? $this->streamFactory->createStreamFromResource($serializedBody)
-                // @phpstan-ignore-next-line argument.type
-                : $this->streamFactory->createStream($serializedBody);
-
             $request = $request->withBody($stream)
-                ->withHeader('Content-Type', $contentType);
+                ->withHeader('Content-Type', $op->getBody()->getMimeType());
         }
 
         return $request;
