@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/compwright/easy-api/compare/v1.0.1...v1.1.0) (2025-03-30)
+
+
+### Features
+
+* always throw PSR-18 error on HTTP 4xx/5xx ([f55e0c1](https://github.com/compwright/easy-api/commit/f55e0c1ced6fa4a92a8fdf285770f1abf5c1f7d3))
+* replace serializers with OperationBody wrappers ([771a386](https://github.com/compwright/easy-api/commit/771a3860fadac2352af79ff89bea76ddb5ad6b14))
+
 ## [1.0.1](https://github.com/compwright/easy-api/compare/v1.0.0...v1.0.1) (2025-03-27)
 
 
