@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\StreamInterface;
 
 class OperationRequestFactory
 {
@@ -36,7 +37,9 @@ class OperationRequestFactory
 
         if ($op->hasBody()) {
             $bodyContent = $op->getBody()->getContent();
-            if (is_resource($bodyContent)) {
+            if ($bodyContent instanceof StreamInterface) {
+                $stream = $bodyContent;
+            } elseif (is_resource($bodyContent)) {
                 $stream = $this->streamFactory->createStreamFromResource($bodyContent);
             } elseif (is_string($bodyContent)) {
                 $stream = $this->streamFactory->createStream($bodyContent);
