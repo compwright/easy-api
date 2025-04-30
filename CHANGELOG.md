@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/compwright/easy-api/compare/v1.1.0...v1.2.0) (2025-04-30)
+
+
+### Features
+
+* add StreamBody ([33d7ae5](https://github.com/compwright/easy-api/commit/33d7ae5a511d42cbf9db87ca5eaac032ba7c2d6f))
+
 ## [1.1.0](https://github.com/compwright/easy-api/compare/v1.0.1...v1.1.0) (2025-03-30)
 
 
